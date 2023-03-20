@@ -7,7 +7,11 @@
     "test": "node_modules/.bin/cypress run",
     "headTest": "npm run test -- --headed",
     "chromeTest": "npm run test -- --browser chrome",
-    "firefoxTest": "npm run test -- --browser firefox"
+    "firefoxTest": "npm run test -- --browser firefox",
+    "chromeTestlaptop": "npx cypress run --browser chrome --headed --config-file cypress/e2e/laptopConfig.js",
+    "chromeTestMob": "npx cypress run --browser chrome --headed --config-file cypress/e2e/mobileConfig.js",
+    "firefoxLaptop": "npx cypress run --browser firefox --headed --config-file cypress/e2e/laptopConfig.js",
+    "firefoxMob": "npx cypress run --browser firefox --headed --config-file cypress/e2e/mobileConfig.js"
   },
   "keywords": [],
   "author": "",

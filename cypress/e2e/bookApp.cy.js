@@ -1,3 +1,5 @@
+const credentials = require("../fixtures/credentials.json");
+
 beforeEach(() => {
   //cy.viewport(
   //  Cypress.env("viewportWidthLaptop"),
@@ -8,8 +10,8 @@ beforeEach(() => {
 });
 
 describe("entry testing", () => {
-  const email = "test@test.com";
-  const password = "test";
+  const email = credentials.login;
+  const password = credentials.password;
   it("successfull entry", () => {
     cy.login(email, password);
     cy.get(".pt-2").contains(`Добро пожаловать ${email}`).should("be.visible");
@@ -25,7 +27,7 @@ describe("entry testing", () => {
   });
 
   it("invalid email format", () => {
-    const wrongEmail = "wrongMail";
+    const wrongEmail = credentials.invalidEmail1;
     cy.login(wrongEmail, password);
     cy.get("#mail")
       .then((foundItem) => foundItem[0].checkValidity())
@@ -38,7 +40,7 @@ describe("entry testing", () => {
       );
   });
   it("invalid email format - dot issue ", () => {
-    const wrongEmail = "wrongMail@.com";
+    const wrongEmail = credentials.invalidEmail2;
     cy.login(wrongEmail, password);
     cy.get("#mail")
       .then((foundItem) => foundItem[0].checkValidity())
@@ -48,14 +50,14 @@ describe("entry testing", () => {
       .should("contain", `Недопустимое положение символа "." в адресе ".com".`);
   });
   it("enter with invalid email", () => {
-    const wrongEmail = "wrongMail@gmail.com";
+    const wrongEmail = credentials.invalidEmail3;
     cy.login(wrongEmail, password);
     cy.get(".text-danger")
       .then((foundItem) => foundItem[0].textContent)
       .should("contain", "Неправильая почта или пароль");
   });
   it("enter with invalid password", () => {
-    const wrongPass = "wrongPass";
+    const wrongPass = credentials.invalidPass;
     cy.login(email, wrongPass);
     cy.get(".text-danger")
       .then((foundItem) => foundItem[0].textContent)
@@ -63,8 +65,8 @@ describe("entry testing", () => {
   });
 });
 describe("adding books", () => {
-  const email = "test@test.com";
-  const password = "test";
+  const email = credentials.login;
+  const password = credentials.password;
   it("add new book", () => {
     const title = "Записки юного врача";
     cy.login(email, password);
